@@ -7,8 +7,6 @@ import * as firebase from 'firebase';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  createdAt = new Date();
-
   constructor() {
     const config = {
       apiKey: 'AIzaSyBFnj42hLHGxPL6nP3vIUaDDLx-SL9RYu8',
