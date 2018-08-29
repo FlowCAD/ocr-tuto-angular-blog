@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-root',
@@ -7,26 +8,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   createdAt = new Date();
-  // tslint:disable-next-line:max-line-length
-  lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In odio velit, aliquet non risus eu, sollicitudin convallis quam. Maecenas tristique, justo id dictum vehicula, velit sapien viverra tortor, vitae semper libero arcu ac dolor. Aenean dapibus vestibulum nibh quis suscipit. Aliquam in convallis neque, a pellentesque felis. Nam et feugiat ipsum. Nullam nec nisi a orci imperdiet dictum.';
-  posts = [
-    {
-      title: 'Mon premier post',
-      content: this.lorem,
-      loveIts: 10,
-      created_at: this.createdAt
-    }, {
-      title: 'Mon second post',
-      content: this.lorem,
-      loveIts: -5,
-      created_at: this.createdAt
-    }, {
-      title: 'Encore un post',
-      content: this.lorem,
-      loveIts: 0,
-      created_at: this.createdAt
-    }
-  ];
 
-  constructor() {}
+  constructor() {
+    const config = {
+      apiKey: 'AIzaSyBFnj42hLHGxPL6nP3vIUaDDLx-SL9RYu8',
+      authDomain: 'my-blog-6c309.firebaseapp.com',
+      databaseURL: 'https://my-blog-6c309.firebaseio.com',
+      projectId: 'my-blog-6c309',
+      storageBucket: 'my-blog-6c309.appspot.com',
+      messagingSenderId: '1088284118976'
+    };
+    firebase.initializeApp(config);
+  }
 }

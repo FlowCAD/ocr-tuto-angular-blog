@@ -1,9 +1,4 @@
-<li [ngClass]="{'list-group-item': true,
-  'list-group-item-success': getColor() === 'green',
-  'list-group-item-danger': getColor() === 'red'}">
-  <h4 [ngStyle]="{color: getColor()}">{{ postTitle }}</h4>
-  <i>Créé le : {{postDate | date: 'short'}}</i>
-  <p>{{postContent}}</p>
-  <button class="btn btn-success" (click)="onLovit('more')">Love it !</button>
-  <button class="btn btn-danger" (click)="onLovit('less')">Don't love it !</button>
-</li>
+<app-post-list-item *ngFor="let post of posts" [post]="post"></app-post-list-item>
+<div class="alert alert-info" *ngIf="posts.length <= 0">
+    <p>Soyez le premier à saisir un article !<br/><a routerLink="/posts-new">Créer un article</a></p>
+</div>

@@ -1,36 +1,34 @@
-import { Component, Input } from '@angular/core';
+import { Component,  OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { Post } from '../models/post.model';
+import { PostsService } from '../services/posts.service';
 
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.css']
 })
-export class PostListComponent {
+export class PostListComponent implements OnInit, OnDestroy {
 
-  @Input() postTitle: string;
-  @Input() postContent: string;
-  @Input() postLoveIts: number;
-  @Input() postDate: string;
+  posts: Post[];
+  postsSubscription: Subscription;
 
-  constructor() { }
+  constructor(
+    private postsService: PostsService
+  ) { }
 
-  getColor() {
-    if (this.postLoveIts > 0) {
-      return 'green';
-    } else if (this.postLoveIts < 0) {
-      return 'red';
-    } else {
-      return null;
-    }
+  ngOnInit() {
+    this.postsSubscription = this.postsService.postsSubject.subscribe(
+      (posts: Post[]) => {
+        this.posts = posts;
+      }
+    );
+    this.postsService.getPosts();
+    this.postsService.emitPosts();
   }
 
-  onLovit(value) {
-    if (value === 'more') {
-      this.postLoveIts ++;
-    } else if (value === 'less') {
-      this.postLoveIts --;
-    } else {
-      console.log('There is an error !');
-    }
+  ngOnDestroy() {
+    this.postsSubscription.unsubscribe();
   }
 }

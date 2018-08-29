@@ -1,0 +1,12 @@
+<li [ngClass]="{'list-group-item': true, 'list-group-item-success': post.loveIts > 0, 'list-group-item-danger': post.loveIts < 0}">
+  <h3 class="list-group-item-heading">
+    <strong>{{ post.title }}</strong>
+    <button class="btn btn-default pull-right" (click)="onRemovePost(post)">
+      <span class="glyphicon glyphicon-minus"></span>
+    </button>
+  </h3>
+  <p>{{ post.content }}</p>
+  <button class="btn btn-success" style="margin-right:10px;" (click)="onLoveIt()">J'aime !</button>
+  <span>{{ post.loveIts }}</span>
+  <button class="btn btn-danger" style="margin-left:10px;" (click)="onDontLoveIt()">Je déteste !</button>
+</li>
